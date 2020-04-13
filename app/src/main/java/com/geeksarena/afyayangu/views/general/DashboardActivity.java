@@ -78,7 +78,7 @@ public class DashboardActivity extends AppCompatActivity {
                     updateUI(corvidSummery);
 
                 }else{
-                    Toast.makeText(DashboardActivity.this, response.code() , Toast.LENGTH_LONG).show();
+                    //Toast.makeText(DashboardActivity.this,  response. , Toast.LENGTH_LONG).show();
                 }
 
 

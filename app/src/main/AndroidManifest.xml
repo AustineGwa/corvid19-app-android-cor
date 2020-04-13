@@ -11,13 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.general.KeepingSafeActivity"></activity>
-        <activity android:name=".views.general.AboutCorvid19Activity" />
-        <activity android:name=".views.general.ContactTracingActivity" />
-        <activity android:name=".views.general.MyMapViewActivity" />
-        <activity android:name=".views.users.UserProfile" />
+        <activity android:name=".views.general.KeepingSafeActivity"
+            android:label="Safety"
+            android:parentActivityName=".views.general.DashboardActivity"/>
+        <activity android:name=".views.general.AboutCorvid19Activity"
+            android:label="About Corvid 19"
+            android:parentActivityName=".views.general.DashboardActivity"/>
+        <activity android:name=".views.general.ContactTracingActivity"
+            android:label="Contact Tracing"
+            android:parentActivityName=".views.general.DashboardActivity"/>
+        <activity android:name=".views.general.MyMapViewActivity"
+            android:label="Map"
+            android:parentActivityName=".views.general.DashboardActivity"/>
+
+        <activity android:name=".views.users.UserProfile"
+            android:label="My Profile"
+            android:parentActivityName=".views.general.DashboardActivity"/>
+
         <activity android:name=".views.general.LoginActivity" />
-        <activity android:name=".views.general.DashboardActivity" />
+        <activity android:name=".views.general.DashboardActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".views.general.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

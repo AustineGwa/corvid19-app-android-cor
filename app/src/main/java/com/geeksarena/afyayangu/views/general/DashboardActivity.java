@@ -150,7 +150,7 @@ public class DashboardActivity extends AppCompatActivity {
         accountCircleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo launch profile view
+                startActivity(new Intent(DashboardActivity.this, UserProfile.class));
             }
         });
 

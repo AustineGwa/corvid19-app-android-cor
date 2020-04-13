@@ -42,7 +42,7 @@
             <TextView
                 android:id="@+id/client_header_rating_text_view"
                 android:textColor="@color/txt_color"
-                android:text="4.0"
+                android:text="1.0"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

@@ -128,7 +128,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void setupNavDrawer() {
 
-        String userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        //String userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        String userName = "MIKEWIL";
         accountUserNameTextView.setText(userName);
 
         headerBuilder = new AccountHeaderBuilder();

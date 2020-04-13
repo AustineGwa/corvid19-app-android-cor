@@ -51,7 +51,7 @@ public class Splash extends Activity {
     }
 
     private void startLogin() {
-        Intent i = new Intent(this, LoginActivity.class);
+        Intent i = new Intent(this, DashboardActivity.class);
         startActivity(i);
     }
 

@@ -16,8 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.general.CountryDetailActivity"
-            android:parentActivityName=".views.general.DashboardActivity"/>
+        <activity
+            android:name=".views.general.IntroActivity"
+            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity
+            android:name=".views.general.CountryDetailActivity"
+            android:parentActivityName=".views.general.DashboardActivity" />
         <activity
             android:name=".views.general.KeepingSafeActivity"
             android:label="Safety"

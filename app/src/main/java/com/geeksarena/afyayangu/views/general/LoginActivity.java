@@ -45,7 +45,7 @@ public class LoginActivity extends Activity {
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))  //.requestIdToken("690308578293-3qa6dt5r9q9iqabr3gp7ooqhoo4b1e1a.apps.googleusercontent.com")
+                .requestIdToken("690308578293-tg2cffvq8tdbfvabdpid3sv0c5pinuc2.apps.googleusercontent.com") //.requestIdToken(getString(R.string.default_web_client_id))  //
                 .requestEmail()
                 .requestProfile()
                 .build();
@@ -75,6 +75,7 @@ public class LoginActivity extends Activity {
                 // Google Sign In failed, update UI appropriately
                 Toast.makeText(getApplicationContext()," Sign in failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.w("TAG", "Google sign in failed", e);
+                System.out.println("Response "+e.getStackTrace());
 
             }
         }

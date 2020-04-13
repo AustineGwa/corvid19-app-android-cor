@@ -90,7 +90,7 @@ public class DashboardActivity extends AppCompatActivity {
         RetrofitServiceInstance.getApiService().getCountries().enqueue(new Callback<List<Country>>() {
             @Override
             public void onResponse(Call<List<Country>> call, Response<List<Country>> response) {
-                progressDialog.show();
+                //progressDialog.show();
                 List<Country> countries = response.body();
                updateCountriesList(countries);
 
@@ -98,7 +98,7 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Country>> call, Throwable t) {
-               progressDialog.dismiss();
+               //progressDialog.dismiss();
                 Toast.makeText(DashboardActivity.this, "Error failed to fetch data", Toast.LENGTH_SHORT).show();
                 System.out.println("response  Error  "+ t.getMessage());
             }

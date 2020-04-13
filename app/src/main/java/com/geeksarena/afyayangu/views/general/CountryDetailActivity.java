@@ -15,7 +15,7 @@ public class CountryDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_country_detail);
 
         Country selectedCountry = (Country) getIntent().getSerializableExtra("country");
-        getActionBar().setTitle(selectedCountry.getCountry());
+        getSupportActionBar().setTitle(selectedCountry.getCountry());
 
     }
 }

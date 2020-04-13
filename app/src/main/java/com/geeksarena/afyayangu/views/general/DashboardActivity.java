@@ -78,7 +78,7 @@ public class DashboardActivity extends AppCompatActivity {
                     updateUI(corvidSummery);
 
                 }else{
-                    Toast.makeText(getApplicationContext(), response.code() , Toast.LENGTH_LONG).show();
+                    Toast.makeText(DashboardActivity.this, response.code() , Toast.LENGTH_LONG).show();
                 }
 
 
@@ -112,6 +112,7 @@ public class DashboardActivity extends AppCompatActivity {
                 .withToolbar(toolbar)
                 .withHeader(headerView)
                 .addDrawerItems(
+                        new PrimaryDrawerItem().withIdentifier(0).withName("Dashboard"),
                         new PrimaryDrawerItem().withIdentifier(1).withName("Keeping Safe"),
                         new PrimaryDrawerItem().withIdentifier(2).withName("About Corvid-19"),
                         new PrimaryDrawerItem().withIdentifier(3).withName("Map"),
@@ -125,6 +126,9 @@ public class DashboardActivity extends AppCompatActivity {
 
                         int identifire = (int) iDrawerItem.getIdentifier();
                         switch (identifire) {
+                            case 0:
+                                startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                                break;
                             case 1:
                                 startActivity(new Intent(getApplicationContext(), KeepingSafeActivity.class));
                                 break;

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "690308578293",
+    "firebase_url": "https://afya-now.firebaseio.com",
+    "project_id": "afya-now",
+    "storage_bucket": "afya-now.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690308578293:android:c7dbdd7991b4085caebebc",
+        "android_client_info": {
+          "package_name": "com.geeksarena.afyayangu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690308578293-3qa6dt5r9q9iqabr3gp7ooqhoo4b1e1a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.geeksarena.afyayangu",
+            "certificate_hash": "65e84b835bbb1b838ac95f9597d5b8e4e9d4a1cd"
+          }
+        },
+        {
+          "client_id": "690308578293-tg2cffvq8tdbfvabdpid3sv0c5pinuc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp7Ya-lJOg0H0SK9wvEoRQVsGbpJMGLUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690308578293-tg2cffvq8tdbfvabdpid3sv0c5pinuc2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

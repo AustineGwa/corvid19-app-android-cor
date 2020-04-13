@@ -42,6 +42,8 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CorvidSummery> call, Response<CorvidSummery> response) {
                 corvidSummery = response.body();
+
+                System.out.println("Response "+corvidSummery);
                 updateUI(corvidSummery);
 
             }

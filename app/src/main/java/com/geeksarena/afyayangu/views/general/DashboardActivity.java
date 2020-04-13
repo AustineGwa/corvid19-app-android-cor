@@ -3,6 +3,8 @@ package com.geeksarena.afyayangu.views.general;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,8 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geeksarena.afyayangu.R;
+import com.geeksarena.afyayangu.adapters.AffectedCountriesAdapter;
 import com.geeksarena.afyayangu.api.RetrofitServiceInstance;
+import com.geeksarena.afyayangu.interfaces.CountryClickListener;
 import com.geeksarena.afyayangu.models.CorvidSummery;
+import com.geeksarena.afyayangu.models.Country;
 import com.geeksarena.afyayangu.models.CountryCorvidData;
 import com.geeksarena.afyayangu.models.SumaryPerCountry;
 import com.geeksarena.afyayangu.views.users.UserProfile;
@@ -53,10 +58,18 @@ public class DashboardActivity extends AppCompatActivity {
    private ProfileDrawerItem profileDrawerItem;
    private CircleImageView accountCircleImageView;
 
+   private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
+
+        recyclerView = findViewById(R.id.countries_summary);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(DashboardActivity.this));
+
+
 
         toolbar = findViewById(R.id.dashboard_toolbar);
         progressDialog = new ProgressDialog(this);
@@ -65,31 +78,46 @@ public class DashboardActivity extends AppCompatActivity {
         accountCircleImageView = headerView.findViewById(R.id.client_header_account_image_view);
         accountUserNameTextView = headerView.findViewById(R.id.client_header_user_name_text_view);
         setupNavDrawer();
+        displayCountries();
 
 
 
-        RetrofitServiceInstance.getApiService().getFullSummary().enqueue(new Callback<CorvidSummery>() {
+    }
+
+    private void displayCountries() {
+
+
+        RetrofitServiceInstance.getApiService().getCountries().enqueue(new Callback<List<Country>>() {
             @Override
-            public void onResponse(Call<CorvidSummery> call, Response<CorvidSummery> response) {
-
-                if (response.isSuccessful() && response.body() != null){
-                    corvidSummery = response.body();
-                    System.out.println("Response "+corvidSummery);
-                    updateUI(corvidSummery);
-
-                }else{
-                    //Toast.makeText(DashboardActivity.this,  response. , Toast.LENGTH_LONG).show();
-                }
-
+            public void onResponse(Call<List<Country>> call, Response<List<Country>> response) {
+                progressDialog.show();
+                List<Country> countries = response.body();
+               updateCountriesList(countries);
 
             }
 
             @Override
-            public void onFailure(Call<CorvidSummery> call, Throwable t) {
-                Toast.makeText(DashboardActivity.this, "could not Get Data" +t.getMessage(), Toast.LENGTH_SHORT).show();
-                System.out.println("Response "+t.getMessage() + " Error "+t.getStackTrace());
+            public void onFailure(Call<List<Country>> call, Throwable t) {
+               progressDialog.dismiss();
+                Toast.makeText(DashboardActivity.this, "Error failed to fetch data", Toast.LENGTH_SHORT).show();
+                System.out.println("response  Error  "+ t.getMessage());
             }
         });
+    }
+
+    private void updateCountriesList(List<Country> countries) {
+
+        AffectedCountriesAdapter affectedCountriesAdapter = new AffectedCountriesAdapter(countries, new CountryClickListener() {
+            @Override
+            public void onCountryClick(Country country) {
+                Intent intent = new Intent(DashboardActivity.this, CountryDetailActivity.class);
+                intent.putExtra("country", country);
+                startActivity(intent);
+            }
+        });
+
+        recyclerView.setAdapter(affectedCountriesAdapter);
+
     }
 
     private void updateUI(CorvidSummery corvidSummery) {
@@ -187,26 +215,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
-//        RetrofitServiceInstance.getApiService().getCountries().enqueue(new Callback<List<Country>>() {
-//            @Override
-//            public void onResponse(Call<List<Country>> call, Response<List<Country>> response) {
-//                progressDialog.show();
-//                List<Country> countries = response.body();
-//
-//                for(Country country : countries){
-//                    System.out.println("======= \n"+country.toString() +"\n ======= ");
-//                }
-//                //getListFeaturedBussinesses(bussinessList);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Country>> call, Throwable t) {
-//               progressDialog.dismiss();
-//                Toast.makeText(UserHomeActivity.this, "Error failed to fetch data", Toast.LENGTH_SHORT).show();
-//                System.out.println("response  Error  "+ t.getMessage());
-//            }
-//        });
+
 
 //        RetrofitServiceInstance.getApiService().getConfirmedCasesInKenya().enqueue(new Callback<List<CountryCorvidData>>() {
 //            @Override
@@ -227,4 +236,29 @@ public class DashboardActivity extends AppCompatActivity {
 //                Toast.makeText(DashboardActivity.this, "Error failed to fetch data", Toast.LENGTH_SHORT).show();
 //                System.out.println("response  Error  "+ t.getMessage());
 //            }
+//        });
+
+//
+//
+//        RetrofitServiceInstance.getApiService().getFullSummary().enqueue(new Callback<CorvidSummery>() {
+//@Override
+//public void onResponse(Call<CorvidSummery> call, Response<CorvidSummery> response) {
+//
+//        if (response.isSuccessful() && response.body() != null){
+//        corvidSummery = response.body();
+//        System.out.println("Response "+corvidSummery);
+//        updateUI(corvidSummery);
+//
+//        }else{
+//        //Toast.makeText(DashboardActivity.this,  response. , Toast.LENGTH_LONG).show();
+//        }
+//
+//
+//        }
+//
+//@Override
+//public void onFailure(Call<CorvidSummery> call, Throwable t) {
+//        Toast.makeText(DashboardActivity.this, "could not Get Data" +t.getMessage(), Toast.LENGTH_SHORT).show();
+//        System.out.println("Response "+t.getMessage() + " Error "+t.getStackTrace());
+//        }
 //        });

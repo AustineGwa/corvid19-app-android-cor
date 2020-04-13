@@ -1,6 +1,8 @@
 package com.geeksarena.afyayangu.models;
 
-public class Country {
+import java.io.Serializable;
+
+public class Country implements Serializable {
 
        private  String Country;
        private  String Slug;

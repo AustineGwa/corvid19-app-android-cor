@@ -2,12 +2,17 @@ package com.geeksarena.afyayangu.views.general;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.geeksarena.afyayangu.R;
@@ -16,9 +21,20 @@ import com.geeksarena.afyayangu.models.CorvidSummery;
 import com.geeksarena.afyayangu.models.CountryCorvidData;
 import com.geeksarena.afyayangu.models.SumaryPerCountry;
 import com.geeksarena.afyayangu.views.users.UserProfile;
+import com.google.firebase.auth.FirebaseAuth;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,23 +44,43 @@ public class DashboardActivity extends AppCompatActivity {
    private  CorvidSummery corvidSummery;
    private  List<SumaryPerCountry> sumaryPerCountryList;
    private  String currentDataDate;
+   private TextView accountUserNameTextView;
+   private  View headerView;
+
+   private Toolbar toolbar;
+   private DrawerBuilder drawerBuilder;
+   private AccountHeaderBuilder headerBuilder;
+   private ProfileDrawerItem profileDrawerItem;
+   private CircleImageView accountCircleImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
 
+        toolbar = findViewById(R.id.dashboard_toolbar);
         progressDialog = new ProgressDialog(this);
+        LayoutInflater inflater = (LayoutInflater) DashboardActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        headerView = inflater.inflate(R.layout.client_header_layout, null);
+        accountCircleImageView = headerView.findViewById(R.id.client_header_account_image_view);
+        accountUserNameTextView = headerView.findViewById(R.id.client_header_user_name_text_view);
+        setupNavDrawer();
 
 
 
         RetrofitServiceInstance.getApiService().getFullSummary().enqueue(new Callback<CorvidSummery>() {
             @Override
             public void onResponse(Call<CorvidSummery> call, Response<CorvidSummery> response) {
-                corvidSummery = response.body();
 
-                System.out.println("Response "+corvidSummery);
-                updateUI(corvidSummery);
+                if (response.isSuccessful() && response.body() != null){
+                    corvidSummery = response.body();
+                    System.out.println("Response "+corvidSummery);
+                    updateUI(corvidSummery);
+
+                }else{
+                    Toast.makeText(getApplicationContext(), response.code() , Toast.LENGTH_LONG).show();
+                }
+
 
             }
 
@@ -60,6 +96,64 @@ public class DashboardActivity extends AppCompatActivity {
         sumaryPerCountryList = corvidSummery.getCountries();
         currentDataDate = corvidSummery.getDate();
         Toast.makeText(getApplicationContext(),"Date "+currentDataDate, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setupNavDrawer() {
+
+        String userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        accountUserNameTextView.setText(userName);
+
+        headerBuilder = new AccountHeaderBuilder();
+        profileDrawerItem = new ProfileDrawerItem();
+
+        drawerBuilder = new DrawerBuilder();
+        Drawer result = drawerBuilder
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withHeader(headerView)
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withIdentifier(1).withName("Keeping Safe"),
+                        new PrimaryDrawerItem().withIdentifier(2).withName("About Corvid-19"),
+                        new PrimaryDrawerItem().withIdentifier(3).withName("Map"),
+                        new PrimaryDrawerItem().withIdentifier(4).withName("Contact Tracing"),
+                        new DividerDrawerItem()
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(@org.jetbrains.annotations.Nullable View view, int i, @NotNull IDrawerItem<?> iDrawerItem) {
+                        // do something with the clicked item
+
+                        int identifire = (int) iDrawerItem.getIdentifier();
+                        switch (identifire) {
+                            case 1:
+                                startActivity(new Intent(getApplicationContext(), KeepingSafeActivity.class));
+                                break;
+                            case 2:
+                                startActivity(new Intent(getApplicationContext(), AboutCorvid19Activity.class));
+                                break;
+                            case 3:
+                                startActivity(new Intent(getApplicationContext(), MyMapViewActivity.class));
+                                break;
+                            case 4:
+                                startActivity(new Intent(getApplicationContext(), ContactTracingActivity.class));
+
+
+                            default:
+                                Toast.makeText(getApplicationContext(), "slider item clicked", Toast.LENGTH_SHORT).show();
+
+
+                        }
+                        return false;
+                    }
+                }).build();
+
+        accountCircleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //todo launch profile view
+            }
+        });
+
     }
 
 

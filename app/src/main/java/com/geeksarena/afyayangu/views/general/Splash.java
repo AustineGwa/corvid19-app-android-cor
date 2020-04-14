@@ -38,14 +38,10 @@ public class Splash extends AppCompatActivity {
             editor.putBoolean(prevStarted, Boolean.TRUE);
             editor.apply();
             Intent intent = new Intent(this, IntroActivity.class);
-
             updateUI(intent);
         } else {
             Intent intent = new Intent(this, LoginActivity.class);
-
-
             updateUI(intent);
-
 
         }
 
@@ -60,7 +56,7 @@ public class Splash extends AppCompatActivity {
 
 
                     Thread.sleep(1000);
-                    startLogin(intent);
+                    next(intent);
 
 
                 } catch (InterruptedException e) {
@@ -71,7 +67,7 @@ public class Splash extends AppCompatActivity {
         thread.start();
     }
 
-    private void startLogin(Intent intent) {
+    private void next(Intent intent) {
 
         startActivity(intent);
         finish();

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.geeksarena.afyayangu.views.general.UserIntroFragment;
+import com.geeksarena.afyayangu.fragments.UserIntroFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;

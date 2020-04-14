@@ -1,4 +1,4 @@
-package com.geeksarena.afyayangu.views.general;
+package com.geeksarena.afyayangu.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

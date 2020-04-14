@@ -168,6 +168,7 @@ public class DashboardActivity extends AppCompatActivity {
                                 break;
                             case 4:
                                 startActivity(new Intent(getApplicationContext(), ContactTracingActivity.class));
+                                break;
 
 
                             default:

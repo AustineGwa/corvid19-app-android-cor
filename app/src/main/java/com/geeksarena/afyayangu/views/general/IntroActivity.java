@@ -37,14 +37,14 @@ public class IntroActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UpdateUI();
+                skipSlides();
             }
         });
     }
 
 
-    void UpdateUI() {
-        startActivity(new Intent(this, DashboardActivity.class));
+    void skipSlides(){
+        startActivity(new Intent(this, LoginActivity.class));
 
     }
 }

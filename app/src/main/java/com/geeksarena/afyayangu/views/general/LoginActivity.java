@@ -45,10 +45,9 @@ public class LoginActivity extends Activity {
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                //for release mode apk
-                .requestIdToken("690308578293-tg2cffvq8tdbfvabdpid3sv0c5pinuc2.apps.googleusercontent.com")
-                //for debug mode apk
-                //.requestIdToken(getString(R.string.default_web_client_id))
+
+                //for debug mode apk replace with your app id when building release mode apks
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .requestProfile()
                 .build();

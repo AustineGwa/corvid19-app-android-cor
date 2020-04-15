@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "690308578293-p9spdi1q7lms1cukt6n0bim2svkdb0aa.apps.googleusercontent.com",
+          "client_id": "690308578293-hcl50bktjniucs7hj6osvm517rlkroak.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.geeksarena.afyayangu",
-            "certificate_hash": "83a0fb19bfc2095533164893db84846b1ac98a8d"
+            "certificate_hash": "65e84b835bbb1b838ac95f9597d5b8e4e9d4a1cd"
           }
         },
         {

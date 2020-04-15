@@ -215,7 +215,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
-
+//todo remove comments to access any of the mentioned endpoints
 
 
 //        RetrofitServiceInstance.getApiService().getConfirmedCasesInKenya().enqueue(new Callback<List<CountryCorvidData>>() {
